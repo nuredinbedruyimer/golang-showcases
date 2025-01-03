@@ -49,9 +49,38 @@ func RotateLeft(arr[]int, k int) []int{
 		ans=append(ans, arr[index])
 
 	}
-	for index := 0; index < k; index ++{
+	for index := range k{
 		ans = append(ans, arr[index])
 	}
 	return ans
 
+}
+func RotateLeftInPlace(arr[]int , k int){
+	N := len(arr)
+	k = k % N
+
+	for index := range k{
+		arr[index], arr[N - (index + 1)] = arr[N - (index + 1)], arr[index]
+	}
+
+	left := 0
+	right := N - k - 1
+	// fmt.Println(arr)
+
+	for left < right{
+		arr[left], arr[right] = arr[right], arr[left]
+		left += 1
+		right -= 1
+	}
+	// fmt.Println(arr)
+	left = N - k
+	right = N - 1
+	for left < right{
+		arr[left], arr[right] = arr[right], arr[left]
+		left += 1
+		right -= 1
+	}
+	// fmt.Println(arr)
+
+	
 }
