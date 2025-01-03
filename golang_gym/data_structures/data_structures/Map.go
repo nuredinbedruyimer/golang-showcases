@@ -1,6 +1,9 @@
 package datastructures
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 
 func MapCust(){
@@ -28,4 +31,40 @@ func MapCust(){
 	for name, freq := range nameFrequency{
 		fmt.Println(name, freq)
 	}
+}
+
+func FindFirstNonRepeatingChar(word string)rune{
+	mapp := make(map[rune]int)
+	for _, char := range word{
+		mapp[char] += 1
+	}
+	for key, value := range mapp{
+		if value == 1{
+			return key
+		}
+	}
+	return 'a'
+}
+
+func GroupAnagrams(words []string) [][]string {
+	anagramGroups := make(map[string][]string)
+
+	for _, word := range words {
+		sorted := SortString(word)
+		anagramGroups[sorted] = append(anagramGroups[sorted], word)
+	}
+
+	result := [][]string{}
+	for _, group := range anagramGroups {
+		result = append(result, group)
+	}
+	return result
+}
+
+func SortString(s string) string {
+	r := []rune(s)
+	sort.Slice(r, func(i, j int) bool {
+		return r[i] < r[j]
+	})
+	return string(r)
 }
